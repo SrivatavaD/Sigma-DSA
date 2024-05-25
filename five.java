@@ -1,52 +1,47 @@
-
 import java.util.*;
 
-
-
-import java.io.*;
 public class five {
+    // Trapping rain water Problem
 
-    // Find the total number of pairs in the array whose sum is equal to the given
-    // value x.
-    // public static int pairSum(int a[], int x){
-    //     int count = 0;
-    //     int n = a.length;
-    //     for(int i = 0; i<n; i++)
-    //     for(int j=i+1; j<n; j++)
-    //     if(a[i] + a[j] ==x)
-    //     count++;
-    //     return count;
-    // }
-    // public static void main(String [] args){
-    //     int a[] = {4,7,3,21,6,5,5};
-    //     System.out.println(pairSum(a,10));
-    // }
+    public static int trappedRainwater(int height[]) {
+        int n = height.length;
+        // calculate left max boundary - array
+        int leftMax[] = new int[n];
+        leftMax[0] = height[0];
+        for (int i = 1; i < n; i++) {
+            leftMax[i] = Math.max(height[i], leftMax[i - 1]);
 
-    // 
-
-    //Find the unique number in a given array where all the elements are repeated
-    //twice with one value being unique
-
-    public static int findUnique(int[] a){
-        int n = a.length;
-        for(int i = 0; i<n; i++){
-            for(int j = i+1; j<n ; j++){
-                if(a[i] == a[j]){
-                    a[i] = a[j] = -1;
-                }
-            }
         }
-        for(int i = 0; i<n; i++){
-            if(a[i]>0)
-            return 1 ;
+        // calculate right max boundary - array
+
+        int rightMax[] = new int[n];
+        rightMax[n - 1] = height[n - 1];
+        for (int i = n - 2; i >= 0; i--) {
+            rightMax[i] = Math.max(height[i], rightMax[i + 1]);
         }
-    public static void main(String[] args){
-        int a[] = {21,7,8,21,5,7,5};
-        System.out.println(findUnique(a));
+
+        int trappedWater = 0;
+
+        // loop
+
+        for (int i = 0; i < n; i++) {
+            // waterLevel = min(lad\ftmax bound , rightmax bound)
+            int waterLevel = Math.min(leftMax[i], rightMax[i]);
+            // trappedWater += waterLevel - height[i];
+            trappedWater += waterLevel - height[i];
+        }
+
+        return trappedWater;
     }
 
-    //Find the second-largest value in the given array.
+    // trapped water = waterLevel
+    public static void main(String[] args) {
 
+        int height[] = { 4, 2, 0, 6, 3, 2, 5 };
+        System.out.println(trappedRainwater(height));
     }
-    
+
+}
+
+//time complexity is O(n) which is a linear time complexity and is considered very good
 
