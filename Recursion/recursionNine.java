@@ -6,7 +6,7 @@ public class recursionNine {
             return;
         }
         //transfer top n-1 from src to helper using dest as helper
-        towerOfHanoi(n-1, src, helper, dest);
+        towerOfHanoi(n-1, src, dest , helper);
         //transfer nth from src to dest
         System.out.println("transfer disk " + n + " from " + src + " to " + helper);
         //transfer n-1 from helper to dest using src as "helper"
